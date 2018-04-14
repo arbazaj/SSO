@@ -14,5 +14,16 @@ namespace JWT.Controllers
 
             return View();
         }
+
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(string username,string password)
+        {
+            return View();
+        }
     }
 }

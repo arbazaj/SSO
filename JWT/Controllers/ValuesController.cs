@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JWT.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,9 +11,18 @@ namespace JWT.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        
+        [AllowAnonymous]
+        [HttpGet]
+        public string Get(string username, string password)
         {
-            return new string[] { "value1", "value2" };
+            if (CheckUser(username, password))
+            {
+                return TokenGeneration.GenerateToken(username);
+            }
+
+            throw new HttpResponseException(HttpStatusCode.Unauthorized);
+            
         }
 
         // GET api/values/5
@@ -34,6 +44,11 @@ namespace JWT.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+        public bool CheckUser(string username, string password)
+        {
+            // should check in the database
+            return true;
         }
     }
 }
