@@ -1,6 +1,9 @@
-﻿using System;
+﻿using JWT.Models;
+using JWT.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,9 +24,15 @@ namespace JWT.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(string username,string password)
+        public async Task LogIn(string username,string password)
         {
-            return View();
+            Employee employee = new Employee { Name = "shubham", Password = "123", Email = "shubham109singh", Role = "user" };
+            if(username==employee.Name& password == employee.Password)
+            {
+                string token = TokenGeneration.GenerateToken(employee);
+                HttpContext.Response.Redirect("https://auth.helprace.com/jwt/csharp?jwt=" + token);
+            }
+           
         }
     }
 }

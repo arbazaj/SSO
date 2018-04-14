@@ -1,4 +1,5 @@
-﻿using JWT.Service;
+﻿using JWT.Models;
+using JWT.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,11 @@ namespace JWT.Controllers
         [HttpGet]
         public string Get(string username, string password)
         {
-            if (CheckUser(username, password))
-            {
-                return TokenGeneration.GenerateToken(username);
-            }
+           
+                Employee emp = new Employee() { Name = "shubham", Password = "123", Email = "shubham109singh", Role = "user" };
+               
+                return TokenGeneration.GenerateToken(emp);
 
-            throw new HttpResponseException(HttpStatusCode.Unauthorized);
             
         }
 

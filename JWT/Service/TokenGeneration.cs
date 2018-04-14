@@ -25,10 +25,14 @@ namespace JWT.Service
             {
                 Subject = new ClaimsIdentity(new[]
                     {
-                        new Claim(ClaimTypes.Name, emp.Name),
-                        new Claim(JwtRegisteredClaimNames.Email,emp.Email),
-                        new Claim(JwtRegisteredClaimNames.Iat,now.ToString()),
                         new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat,now.ToString()),
+                        new Claim("email",emp.Email),
+                        new Claim("external_id",Guid.NewGuid().ToString()),
+                        new Claim("name", emp.Name),
+                        new Claim("organization","csharp"),
+                        new Claim("orgnization_url","http://localhost:63719/"),
+                        new Claim("job_title","developer"),
                         new Claim(ClaimTypes.Role,emp.Role)
                     }),
 
