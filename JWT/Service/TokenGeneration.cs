@@ -1,10 +1,12 @@
 ﻿using JWT.Models;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Web;
 
 namespace JWT.Service
@@ -12,12 +14,13 @@ namespace JWT.Service
 
     public class TokenGeneration
     {
-        private const string Secret = "b2c74a18abe275904d7719205acaff53";
+        private const string Secret = "93948c2e214820766c7c284e0eca44e6";
 
         public static string GenerateToken(Employee emp)
         {
 
-            var symmetricKey = Convert.FromBase64String(Secret);
+            var symmetricKey = Encoding.UTF8.GetBytes(Secret);
+
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var now = DateTime.UtcNow;
@@ -26,9 +29,9 @@ namespace JWT.Service
                 Subject = new ClaimsIdentity(new[]
                     {
                         new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat,now.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat,(now.Second+180) .ToString()),
                         new Claim("email",emp.Email),
-                        new Claim("external_id",Guid.NewGuid().ToString()),
+                        //new Claim("external_id",Guid.NewGuid().ToString()),
                         new Claim("name", emp.Name),
                         new Claim("organization","csharp"),
                         new Claim("orgnization_url","http://localhost:63719/"),

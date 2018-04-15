@@ -26,11 +26,11 @@ namespace JWT.Controllers
         [HttpPost]
         public async Task LogIn(string username,string password)
         {
-            Employee employee = new Employee { Name = "shubham", Password = "123", Email = "shubham109singh", Role = "user" };
+            Employee employee = new Employee { Name = "shubham", Password = "123", Email = "asfkhkjdhfjdh@gmail.com", Role = "user" };
             if(username==employee.Name& password == employee.Password)
             {
                 string token = TokenGeneration.GenerateToken(employee);
-                HttpContext.Response.Redirect("https://auth.helprace.com/jwt/csharp?jwt=" + token);
+                HttpContext.Response.Redirect("https://auth.helprace.com/jwt/csharp?jwt=" + token+ "&return_to=https://csharp.helprace.com/");
             }
            
         }
