@@ -26,13 +26,28 @@ namespace JWT.Controllers
         [HttpPost]
         public async Task LogIn(string username,string password)
         {
-            Employee employee = new Employee { Name = "shubham", Password = "123", Email = "asfkhkjdhfjdh@gmail.com", Role = "user" };
-            if(username==employee.Name& password == employee.Password)
+            List<Employee> employeeList = new List<Employee>
             {
-                string token = TokenGeneration.GenerateToken(employee);
-                HttpContext.Response.Redirect("https://auth.helprace.com/jwt/csharp?jwt=" + token+ "&return_to=https://csharp.helprace.com/");
+                new Employee {Name = "shubham", Password = "123", Email = "Abcahjdi@gmail.com", Role = "user"},
+                new Employee {Name = "Ansh", Password = "123", Email = "Siuhfid@gmail.com", Role = "user"},
+                new Employee {Name = "Arbaz", Password = "123", Email = "asfkhkjdhfjdh@gmail.com", Role = "user"},
+                new Employee {Name = "Sumit", Password = "123", Email = "amunitdh@gmail.com", Role = "user"},
+
+            };
+            foreach(Employee employee in employeeList)
+            {
+                if (username == employee.Name & password == employee.Password)
+                {
+                    string token = TokenGeneration.GenerateToken(employee);
+                    HttpContext.Response.Redirect("https://auth.helprace.com/jwt/csharp?jwt=" + token + "&return_to=https://csharp.helprace.com/");
+                }
             }
-           
+                HttpContext.Response.Redirect("http://localhost:63719/Home/Error");
+        }
+
+        public ActionResult Error()
+        {
+            return View();
         }
     }
 }
