@@ -29,7 +29,7 @@ namespace JWT.Service
                 Subject = new ClaimsIdentity(new[]
                     {
                         new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat,(now.Second+180) .ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat,(now.Second).ToString()),
                         new Claim("email",emp.Email),
                         //new Claim("external_id",Guid.NewGuid().ToString()),
                         new Claim("name", emp.Name),
