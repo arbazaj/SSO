@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "RedirectHelper";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var link = "https://jwt20180415100039.azurewebsites.net/home/redirect";
+}
+
+<input hidden id="redirectBtn" type="button" onclick="parent.window.opener.location='@link'; window.close();">
+<script type="text/javascript">
+
+    window.onload = document.getElementById("redirectBtn").click();
+</script>

@@ -13,17 +13,7 @@ namespace JWT.Controllers
     {
         // GET api/values
         
-        [AllowAnonymous]
-        [HttpGet]
-        public string Get(string username, string password)
-        {
-           
-                Employee emp = new Employee() { Name = "shubham", Password = "123", Email = "shubham109singh", Role = "user" };
-               
-                return TokenGeneration.GenerateToken(emp);
-
-            
-        }
+     
 
         // GET api/values/5
         public string Get(int id)
